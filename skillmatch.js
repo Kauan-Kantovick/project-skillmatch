@@ -11,6 +11,33 @@ candidato em relaçao a vaga, comparando as habilidades do candidato com os requ
  - Sugestão de estudos com base nas habilidades faltantes, para ser adotada pelo candidato.
  */
 
+//CRIANDO CLASSE VAGA
+class Vaga {
+  constructor(empresa, cargo, requisitos, salario, modalidade) {
+    this.empresa    = empresa;
+    this.cargo      = cargo;
+    this.requisitos = requisitos;
+    this.salario    = salario;
+    this.modalidade = modalidade;
+  }
+
+  exibirResumo() {
+    return `${this.cargo} na empresa ${this.empresa}`;
+  }
+}
+
+//CRIANDO CLASSE VAGA FRONT-END HERDANDO CLASSE
+class VagaFrontEnd extends Vaga {
+  constructor(empresa, cargo, requisitos, salario, modalidade, nivel) {
+    super(empresa, cargo, requisitos, salario, modalidade);
+    this.nivel = nivel;
+  }
+
+  exibirNivel() {
+    return `Nível da vaga: ${this.nivel}`;
+  }
+}
+
 //CRIANDO PERFIL DO CANDIDATO
 const candidato = {
   nome: "Ricardo",
@@ -21,23 +48,9 @@ const candidato = {
 
 //CRIANDO ARRAY DAS VAGAS
 const vagas = [
-  { id: 1, 
-    empresa: "ProSolutions", 
-    cargo: "Front-End Developer",
-    requisitos: ["HTML", "CSS", "JavaScript", "React"], 
-    salario: 3500 
-  },
-  { id: 2, 
-    empresa: "DataTech", 
-    cargo: "Desenvolvedor Front-End Jr",
-    requisitos: ["HTML", "CSS", "JavaScript"], 
-    salario: 3000 
-  },
-  { id: 3, 
-    empresa: "Digital Systems", 
-    cargo: "Front-End React",
-    requisitos: ["HTML", "CSS", "JavaScript", "React", "Git"], 
-    salario: 4200 }
+  new Vaga(1, "ProSolutions", "Front-End Developer", ["HTML", "CSS", "JavaScript", "React"], 3500, "Remoto"),
+  new Vaga(2, "DataTech", "Desenvolvedor Front-End Jr", ["HTML", "CSS", "JavaScript"], 3000, "Híbrido"),
+  new Vaga(3, "Digital Systems", "Front-End React", ["HTML", "CSS", "JavaScript", "React", "Git"], 4200, "Híbrido")
 ];
 
 //FUNÇÃO PARA CALCULAR PERCENTUAL DE COMPATIBILIDADE DAS HABILIDADES DO CANDIDATO COM REQUISITOS DA VAGA
@@ -116,32 +129,5 @@ function recomendarEstudos(candidato, vagas) {
     console.log("Você já tem todas as habilidades necessárias!");
   } else {
     console.log(`Priorize estudar ${lista}, pois esses conteúdos aparecem nas vagas analisadas.`);
-  }
-}
-
-//CRIANDO CLASSE VAGA
-class Vaga {
-  constructor(empresa, cargo, requisitos, salario, modalidade) {
-    this.empresa    = empresa;
-    this.cargo      = cargo;
-    this.requisitos = requisitos;
-    this.salario    = salario;
-    this.modalidade = modalidade;
-  }
-
-  exibirResumo() {
-    return `${this.cargo} na empresa ${this.empresa}`;
-  }
-}
-
-//CRIANDO CLASSE VAGA FRONT-END HERDANDO CLASSE
-class VagaFrontEnd extends Vaga {
-  constructor(empresa, cargo, requisitos, salario, modalidade, nivel) {
-    super(empresa, cargo, requisitos, salario, modalidade);
-    this.nivel = nivel;
-  }
-
-  exibirNivel() {
-    return `Nível da vaga: ${this.nivel}`;
   }
 }
