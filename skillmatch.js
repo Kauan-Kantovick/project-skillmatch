@@ -39,3 +39,37 @@ const vagas = [
     requisitos: ["HTML", "CSS", "JavaScript", "React", "Git"], 
     salario: 4200 }
 ];
+
+//FUNÇÃO PARA CALCULAR PERCENTUAL DE CMPATIBILIDADE DAS HABIBILIDADES DO CANDIDATO COM REUUISITOS DA VAGA
+function calcularCompatibilidade(candidato, vaga) {
+  let match = 0;
+  
+  candidato.habilidades.forEach((habilidade) => {
+    if (vaga.requisitos.includes(habilidade)) {
+        match++;
+    }
+  });
+
+  let percentual = ((match / vaga.requisitos.length) * 100).toFixed(0);
+  
+  return percentual;
+         
+}
+
+//FUNÇAO PARA LISTAR AS HABILIDADE OOMPATIVEIS DO CANDIDATO
+function habilidadesEncontradas(candidato, vaga) {
+  return vaga.requisitos.filter((requisito) => {
+    return candidato.habilidades.includes(requisito);
+  });
+}
+
+//FUNÇÃO PARA CLASSIFICAR COMPATIBILIDADE DA VAGA
+function classificaCompatibilidade(percentual) {
+  if (percentual >= 80) {
+    return "Alta Compatibilidade";
+  } else if (percentual >= 50 & percentual <= 79) {
+    return "Média Compatibilidade";
+  } else {
+    return "Baixa Compatibilidade";
+  }
+}
