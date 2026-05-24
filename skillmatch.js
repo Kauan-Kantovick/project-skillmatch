@@ -40,7 +40,7 @@ const vagas = [
     salario: 4200 }
 ];
 
-//FUNÇÃO PARA CALCULAR PERCENTUAL DE CMPATIBILIDADE DAS HABIBILIDADES DO CANDIDATO COM REUUISITOS DA VAGA
+//FUNÇÃO PARA CALCULAR PERCENTUAL DE COMPATIBILIDADE DAS HABILIDADES DO CANDIDATO COM REQUISITOS DA VAGA
 function calcularCompatibilidade(candidato, vaga) {
   let match = 0;
   
@@ -56,7 +56,7 @@ function calcularCompatibilidade(candidato, vaga) {
          
 }
 
-//FUNÇAO PARA LISTAR AS HABILIDADE OOMPATIVEIS DO CANDIDATO
+//FUNÇÃO PARA LISTAR AS HABILIDADE COMPATIVEIS DO CANDIDATO
 function habilidadesEncontradas(candidato, vaga) {
   return vaga.requisitos.filter((requisito) => {
     return candidato.habilidades.includes(requisito);
@@ -74,7 +74,7 @@ function classificaCompatibilidade(percentual) {
   }
 }
 
-//FUNÇAO PARA LISTAR AS HABILIDADE FALTANTES DO CANDIDATO
+//FUNÇÃO PARA LISTAR AS HABILIDADES FALTANTES DO CANDIDATO
 function listaHabilidadesFaltantes(candidato, vaga) {
   return vaga.requisitos.filter((requisito) => {
     return !candidato.habilidades.includes(requisito);
@@ -116,5 +116,32 @@ function recomendarEstudos(candidato, vagas) {
     console.log("Você já tem todas as habilidades necessárias!");
   } else {
     console.log(`Priorize estudar ${lista}, pois esses conteúdos aparecem nas vagas analisadas.`);
+  }
+}
+
+//CRIANDO CLASSE VAGA
+class Vaga {
+  constructor(empresa, cargo, requisitos, salario, modalidade) {
+    this.empresa    = empresa;
+    this.cargo      = cargo;
+    this.requisitos = requisitos;
+    this.salario    = salario;
+    this.modalidade = modalidade;
+  }
+
+  exibirResumo() {
+    return `${this.cargo} na empresa ${this.empresa}`;
+  }
+}
+
+//CRIANDO CLASSE VAGA FRONT-END HERDANDO CLASSE
+class VagaFrontEnd extends Vaga {
+  constructor(empresa, cargo, requisitos, salario, modalidade, nivel) {
+    super(empresa, cargo, requisitos, salario, modalidade);
+    this.nivel = nivel;
+  }
+
+  exibirNivel() {
+    return `Nível da vaga: ${this.nivel}`;
   }
 }
