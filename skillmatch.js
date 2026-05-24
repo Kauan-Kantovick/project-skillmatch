@@ -118,3 +118,30 @@ function recomendarEstudos(candidato, vagas) {
     console.log(`Priorize estudar ${lista}, pois esses conteúdos aparecem nas vagas analisadas.`);
   }
 }
+
+//CRIANDO CLASSE VAGA
+class Vaga {
+  constructor(empresa, cargo, requisitos, salario, modalidade) {
+    this.empresa    = empresa;
+    this.cargo      = cargo;
+    this.requisitos = requisitos;
+    this.salario    = salario;
+    this.modalidade = modalidade;
+  }
+
+  exibirResumo() {
+    return `${this.cargo} na empresa ${this.empresa}`;
+  }
+}
+
+//CRIANDO CLASSE VAGA FRONT-END HERDANDO CLASSE
+class VagaFrontEnd extends Vaga {
+  constructor(empresa, cargo, requisitos, salario, modalidade, nivel) {
+    super(empresa, cargo, requisitos, salario, modalidade);
+    this.nivel = nivel;
+  }
+
+  exibirNivel() {
+    return `Nível da vaga: ${this.nivel}`;
+  }
+}
