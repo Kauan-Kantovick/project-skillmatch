@@ -131,3 +131,24 @@ function recomendarEstudos(candidato, vagas) {
     console.log(`Priorize estudar ${lista}, pois esses conteúdos aparecem nas vagas analisadas.`);
   }
 }
+
+//FUNÇÃO SIMULANDO BUSCA DE VAGAS COM PROMISE
+function buscarVagas() {
+  return new Promise((resolve, reject) => {
+
+    console.log("Buscando vagas...");
+
+    //INSERINDO SET TIMEOUT PARA SIMULAR O TEMPO DE RESPOSTAI
+    setTimeout(() => {
+      
+      let sucesso = true; 
+
+      if (sucesso) {
+        resolve(vagas);
+      } else {
+        reject("Nenhuma vaga encontrada!");
+      }
+
+    }, 2000);
+  });
+}
