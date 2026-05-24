@@ -202,6 +202,22 @@ recomendarEstudos(candidato, vagas);
 
 console.log("==================================== \n");
 
+//FUNÇÂO COM CALLBACK
+
+const analiseFinal = "Análise finalizada." 
+const nomeCandidato = candidato.nome
+
+function finalizarAnalise(callback) {
+  callback(nomeCandidato, analiseFinal);
+}
+function finalizarAnalise(callback) {
+  console.log(`${nomeCandidato}, revise suas habilidades faltantes e atualize seu plano de estudos.`);
+  console.log(analiseFinal)
+}
+
+finalizarAnalise(nomeCandidato)
+
+
 }catch (erro) {
     console.log(erro);
   }
