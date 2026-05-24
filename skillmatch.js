@@ -73,3 +73,10 @@ function classificaCompatibilidade(percentual) {
     return "Baixa Compatibilidade";
   }
 }
+
+//FUNÇAO PARA LISTAR AS HABILIDADE FALTANTES DO CANDIDATO
+function listaHabilidadesFaltantes(candidato, vaga) {
+  return vaga.requisitos.filter((requisito) => {
+    return !candidato.habilidades.includes(requisito);
+  });
+}
