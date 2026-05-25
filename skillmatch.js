@@ -202,6 +202,21 @@ recomendarEstudos(candidato, vagas);
 
 console.log("==================================== \n");
 
+//FUNÇÃO QUE FORMATA E EXIBI A CONTAGEM DAS ANÁLISES OBTIDAS
+
+function formatarContadorDeAnalises(contadorDeAnalises) {
+  return function () {
+    if (contadorDeAnalises > 0){
+      return `Número de análises obtidas: ${contadorDeAnalises}`
+    } else {
+    return `Sem análises obtidas`
+  }}
+}
+
+let resultado = formatarContadorDeAnalises(contadorDeAnalises)
+
+console.log(resultado())
+
 //FUNÇÂO COM CALLBACK
 
 const analiseFinal = "Análise finalizada." 
