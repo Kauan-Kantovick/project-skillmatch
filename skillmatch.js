@@ -48,9 +48,9 @@ const candidato = {
 
 //CRIANDO ARRAY DAS VAGAS
 const vagas = [
-  new Vaga(1, "ProSolutions", "Front-End Developer", ["HTML", "CSS", "JavaScript", "React"], 3500, "Remoto"),
-  new Vaga(2, "DataTech", "Desenvolvedor Front-End Jr", ["HTML", "CSS", "JavaScript"], 3000, "Híbrido"),
-  new Vaga(3, "Digital Systems", "Front-End React", ["HTML", "CSS", "JavaScript", "React", "Git"], 4200, "Híbrido")
+  new Vaga("ProSolutions", "Front-End Developer", ["HTML", "CSS", "JavaScript", "React"], 3500, "Remoto"),
+  new Vaga("DataTech", "Desenvolvedor Front-End Jr", ["HTML", "CSS", "JavaScript"], 3000, "Híbrido"),
+  new Vaga("Digital Systems", "Front-End React", ["HTML", "CSS", "JavaScript", "React", "Git"], 4200, "Híbrido")
 ];
 
 //FUNÇÃO PARA CALCULAR PERCENTUAL DE COMPATIBILIDADE DAS HABILIDADES DO CANDIDATO COM REQUISITOS DA VAGA
