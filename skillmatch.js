@@ -11,6 +11,33 @@ candidato em relaçao a vaga, comparando as habilidades do candidato com os requ
  - Sugestão de estudos com base nas habilidades faltantes, para ser adotada pelo candidato.
  */
 
+//CRIANDO CLASSE VAGA
+class Vaga {
+  constructor(empresa, cargo, requisitos, salario, modalidade) {
+    this.empresa    = empresa;
+    this.cargo      = cargo;
+    this.requisitos = requisitos;
+    this.salario    = salario;
+    this.modalidade = modalidade;
+  }
+
+  exibirResumo() {
+    return `${this.cargo} na empresa ${this.empresa}`;
+  }
+}
+
+//CRIANDO CLASSE VAGA FRONT-END HERDANDO CLASSE
+class VagaFrontEnd extends Vaga {
+  constructor(empresa, cargo, requisitos, salario, modalidade, nivel) {
+    super(empresa, cargo, requisitos, salario, modalidade);
+    this.nivel = nivel;
+  }
+
+  exibirNivel() {
+    return `Nível da vaga: ${this.nivel}`;
+  }
+}
+
 //CRIANDO PERFIL DO CANDIDATO
 const candidato = {
   nome: "Ricardo",
@@ -21,23 +48,9 @@ const candidato = {
 
 //CRIANDO ARRAY DAS VAGAS
 const vagas = [
-  { id: 1, 
-    empresa: "ProSolutions", 
-    cargo: "Front-End Developer",
-    requisitos: ["HTML", "CSS", "JavaScript", "React"], 
-    salario: 3500 
-  },
-  { id: 2, 
-    empresa: "DataTech", 
-    cargo: "Desenvolvedor Front-End Jr",
-    requisitos: ["HTML", "CSS", "JavaScript"], 
-    salario: 3000 
-  },
-  { id: 3, 
-    empresa: "Digital Systems", 
-    cargo: "Front-End React",
-    requisitos: ["HTML", "CSS", "JavaScript", "React", "Git"], 
-    salario: 4200 }
+  new Vaga("ProSolutions", "Front-End Developer", ["HTML", "CSS", "JavaScript", "React"], 3500, "Remoto"),
+  new Vaga("DataTech", "Desenvolvedor Front-End Jr", ["HTML", "CSS", "JavaScript"], 3000, "Híbrido"),
+  new Vaga("Digital Systems", "Front-End React", ["HTML", "CSS", "JavaScript", "React", "Git"], 4200, "Híbrido")
 ];
 
 //FUNÇÃO PARA CALCULAR PERCENTUAL DE COMPATIBILIDADE DAS HABILIDADES DO CANDIDATO COM REQUISITOS DA VAGA
@@ -119,29 +132,95 @@ function recomendarEstudos(candidato, vagas) {
   }
 }
 
-//CRIANDO CLASSE VAGA
-class Vaga {
-  constructor(empresa, cargo, requisitos, salario, modalidade) {
-    this.empresa    = empresa;
-    this.cargo      = cargo;
-    this.requisitos = requisitos;
-    this.salario    = salario;
-    this.modalidade = modalidade;
-  }
+//FUNÇÃO SIMULANDO BUSCA DE VAGAS COM PROMISE
+function buscarVagas() {
+  return new Promise((resolve, reject) => {
 
-  exibirResumo() {
-    return `${this.cargo} na empresa ${this.empresa}`;
+    console.log("Buscando vagas...");
+
+    //INSERINDO SET TIMEOUT PARA SIMULAR O TEMPO DE RESPOSTAI
+    setTimeout(() => {
+      
+      let sucesso = true; 
+
+      if (sucesso) {
+        resolve(vagas);
+      } else {
+        reject("Nenhuma vaga encontrada!");
+      }
+
+    }, 2000);
+  });
+}
+
+//FUNÇÃO USANDO ASYNC/AWAIT
+async function iniciar() {
+
+  try {
+    
+    let vagasEncontradas = await buscarVagas();
+
+    console.log(`${vagasEncontradas.length} vagas encontradas!\n`);
+
+//a==============================================================================================================================================================================================
+
+//USANDO O FOREACH PARA PERCORRER AS VAGAS E MOSTRAR O RESULTADO DE CADA UMA
+
+let contadorDeAnalises = 0
+
+vagas.forEach((vaga) => {
+  let percentual  = calcularCompatibilidade(candidato, vaga);
+  let compativies = habilidadesEncontradas(candidato, vaga);
+  let classificacao = classificaCompatibilidade(percentual);
+  let faltantes   = listaHabilidadesFaltantes(candidato, vaga);
+
+  console.log("====== ANALISE VAGAS ======")
+
+  console.log("Empresa:", vaga.empresa);
+  console.log("Cargo:", vaga.cargo);
+  console.log("Compatibilidade:", percentual + "%");
+  console.log("Habilidades Compatíveis:", compativies);
+  console.log("Habilidades Faltantes:", faltantes.length > 0 ? faltantes: "Todas as habilidadtes atendem os requisitos");
+  console.log("Classificação:", classificacao);
+  
+  console.log("================================================= \n")
+
+  return contadorDeAnalises++
+
+});
+
+let melhor = melhorVaga(candidato, vagas);
+let percentualMelhor = calcularCompatibilidade(candidato, melhor);
+
+console.log("====== VAGA MAIS COMPATÍVEL ======");
+console.log(melhor.empresa, "-", melhor.cargo);
+console.log("Compatibilidade: ", percentualMelhor,"%");
+console.log("====================================== \n");
+
+console.log("====== Recomendação de Estudo ======");
+recomendarEstudos(candidato, vagas);
+
+console.log("==================================== \n");
+
+//FUNÇÂO COM CALLBACK
+
+const analiseFinal = "Análise finalizada." 
+const nomeCandidato = candidato.nome
+
+function finalizarAnalise(callback) {
+  callback(nomeCandidato, analiseFinal);
+}
+function finalizarAnalise(callback) {
+  console.log(`${nomeCandidato}, revise suas habilidades faltantes e atualize seu plano de estudos.`);
+  console.log(analiseFinal)
+}
+
+finalizarAnalise(nomeCandidato)
+
+
+}catch (erro) {
+    console.log(erro);
   }
 }
 
-//CRIANDO CLASSE VAGA FRONT-END HERDANDO CLASSE
-class VagaFrontEnd extends Vaga {
-  constructor(empresa, cargo, requisitos, salario, modalidade, nivel) {
-    super(empresa, cargo, requisitos, salario, modalidade);
-    this.nivel = nivel;
-  }
-
-  exibirNivel() {
-    return `Nível da vaga: ${this.nivel}`;
-  }
-}
+iniciar();
