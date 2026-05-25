@@ -78,4 +78,4 @@ Kanban/Trello: https://trello.com/b/69e1651ed5f32d5203dc02af
 
 Repositótrio GitHub: https://github.com/Kauan-Kantovick/project-skillmatch
 
-Drive (Video): 
+Drive (Video Kauan): https://drive.google.com/drive/folders/1RO3fbeDNGkz-Uk8o8hkv3TtFWo5m3p2B
